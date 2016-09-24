@@ -1,0 +1,1 @@
+pub_type, author, editor, title, booktitle, pages, year, address, journal, volume, number, month, url, ee, cdrom, cite, publisher, note, crossref, isbn, series, school, chapter, key, mdate, publtype, reviewid, rating
