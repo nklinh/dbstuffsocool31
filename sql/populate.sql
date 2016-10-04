@@ -13,8 +13,8 @@ CREATE TABLE Publication (
   year INT,
   address TEXT,
   journal TEXT,
-  volume INT,
-  number INT,
+  volume TEXT,
+  number TEXT,
   month TEXT,
   publisher_id INT,
   school TEXT,
@@ -81,6 +81,9 @@ CREATE TABLE PublicationCrossReference (
   crossref_key TEXT NOT NULL
 );
 
+
+/* Populate publication table using publication.csv */
+COPY Publication(category, key, mdate, publtype, reviewid, rating, title, booktitle, pages, year, address, journal, volume, number, month, school, chapter) FROM '/Users/prajogotio/proj/cz4031/dbstuffsocool31/dblp_xml_parser/publication.csv' CSV;
 
 /* alter tables later.
 ALTER TABLE Publication ADD UNIQUE (key);
