@@ -1,0 +1,53 @@
+createdb PubDB;
+psql -d PubDB;
+
+CREATE TABLE Publication(
+Pub_type text,
+author text,
+editor text,
+title text,
+booktitle text,
+pages text,
+year text,
+address text,
+journal text,
+volume text,
+number text,
+month text,
+url text,
+ee text,
+carom text,
+cite text,
+publisher text,
+note text,
+crossref text,
+isbn text,
+series text,
+school text,
+chapter text,
+key text,
+mdate text,
+publtype text,
+reviewid text,
+rating text
+);
+
+CREATE TABLE Author (
+id text,
+name text,
+aux text,
+bibtex text 
+);
+
+CREATE TABLE Pub_Auth (
+pubid text,
+authid text,
+PRIMARY KEY (pubid, authid)
+);
+
+COPY Publication FROM ‘/absolute path/dblp.csv' (FORMAT CSV);
+
+
+ALTER TABLE Pub location
+	ALTER COLUMN key SET PRIMARY KEY;
+ 
