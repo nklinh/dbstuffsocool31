@@ -142,12 +142,14 @@ public class DblpXmlHandler extends DefaultHandler {
 
   private void flushValues() {
     PrintWriter out = writers.get("publication");
+    int count = 0;
     for (String fieldName : fieldNames) {
-      out.print(",");
       String value = fieldValues.get(fieldName);
       if (value != null) {
         out.print(String.format("\"%s\"", escapeQuote(value)));
       }
+      if (count != fieldNames.size()-1) out.print(",");
+      ++count;
     }
     out.println();
     fieldValues.clear();
