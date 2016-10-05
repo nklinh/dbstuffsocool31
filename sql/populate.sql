@@ -1,3 +1,4 @@
+-- POSTGRESQL for populating tables.
 -- Populate publication table using publication.csv.
 COPY Publication(category, key, mdate, publtype, reviewid, rating, title, booktitle, pages, year, address, journal, volume, number, month, school, chapter) FROM '/Users/prajogotio/proj/cz4031/dbstuffsocool31/dblp_xml_parser/publication.csv' CSV;
 
@@ -126,3 +127,20 @@ FROM UrlCSV csv
 JOIN Publication pub ON pub.key = csv.publication_key;
 
 DROP TABLE UrlCSV;
+
+-- Load isbn.csv.
+DROP TABLE IF EXISTS IsbnCSV;
+CREATE TEMP TABLE IsbnCSV (
+  publication_key TEXT NOT NULL,
+  isbn TEXT NOT NULL
+);
+COPY IsbnCSV FROM '/Users/prajogotio/proj/cz4031/dbstuffsocool31/dblp_xml_parser/isbn.csv' CSV;
+
+-- Populate PublicationISBN table.
+EXPLAIN ANALYZE
+INSERT INTO PublicationISBN
+SELECT pub.publication_id, csv.isbn
+FROM IsbnCSV csv
+JOIN Publication pub ON pub.key = csv.publication_key;
+
+DROP TABLE IsbnCSV;
