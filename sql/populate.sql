@@ -71,3 +71,24 @@ JOIN EditorCSV csv ON a.name = csv.editor_name
 JOIN Publication pub ON pub.key = csv.publication_key;
 
 DROP TABLE EditorCSV;
+
+-- Load cite.csv.
+DROP TABLE IF EXISTS CitationCSV;
+CREATE TEMP TABLE CitationCSV (
+  publication_key TEXT NOT NULL,
+  citation_key TEXT NOT NULL
+);
+COPY CitationCSV FROM '/Users/prajogotio/proj/cz4031/dbstuffsocool31/dblp_xml_parser/cite.csv' CSV;
+
+
+-- Populate Citation table. Citation with '...' key will not match with any
+-- publication, so those entries will be ignored in effect.
+DELETE FROM Citation;
+EXPLAIN ANALYZE
+INSERT INTO Citation
+SELECT DISTINCT pub.publication_id, cite.publication_id
+FROM CitationCSV ccsv
+JOIN Publication pub ON pub.key = trim(ccsv.publication_key)
+JOIN Publication cite ON cite.key = trim(ccsv.citation_key);
+
+DROP TABLE CitationCSV;
