@@ -48,5 +48,26 @@ SELECT DISTINCT pub.publication_id, a.author_id
 FROM Author a
 JOIN AuthorCSV acsv ON a.name = acsv.author_name
 JOIN Publication pub ON pub.key = acsv.publication_key;
-
 DROP TABLE AuthorCSV;
+
+-- Load editor.csv.
+DROP TABLE IF EXISTS EditorCSV;
+CREATE TEMP TABLE EditorCSV (
+  publication_key TEXT NOT NULL,
+  editor_name TEXT NOT NULL
+);
+COPY EditorCSV FROM '/Users/prajogotio/proj/cz4031/dbstuffsocool31/dblp_xml_parser/editor.csv' CSV;
+
+-- Insert editor names that have not been added into Author table.
+INSERT INTO Author(name)
+SELECT DISTINCT editor_name FROM EditorCSV
+WHERE NOT EXISTS (SELECT 1 FROM Author a WHERE a.name = editor_name);
+
+-- Populate PublicationEditor table.
+INSERT INTO PublicationEditor
+SELECT DISTINCT pub.publication_id, a.author_id
+FROM Author a
+JOIN EditorCSV csv ON a.name = csv.editor_name
+JOIN Publication pub ON pub.key = csv.publication_key;
+
+DROP TABLE EditorCSV;
