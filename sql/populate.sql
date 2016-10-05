@@ -108,3 +108,21 @@ FROM NoteCSV csv
 JOIN Publication pub ON pub.key = csv.publication_key;
 
 DROP TABLE NoteCSV;
+
+-- Load url.csv.
+DROP TABLE IF EXISTS UrlCSV;
+CREATE TEMP TABLE UrlCSV (
+  publication_key TEXT NOT NULL,
+  url TEXT NOT NULL
+);
+COPY UrlCSV FROM '/Users/prajogotio/proj/cz4031/dbstuffsocool31/dblp_xml_parser/url.csv' CSV;
+
+-- Populate PublicationUrl.
+DELETE FROM PublicationUrl;
+EXPLAIN ANALYZE
+INSERT INTO PublicationUrl
+SELECT pub.publication_id, csv.url
+FROM UrlCSV csv
+JOIN Publication pub ON pub.key = csv.publication_key;
+
+DROP TABLE UrlCSV;
