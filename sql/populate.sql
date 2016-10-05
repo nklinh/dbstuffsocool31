@@ -1,4 +1,3 @@
-/*
 -- Populate publication table using publication.csv.
 COPY Publication(category, key, mdate, publtype, reviewid, rating, title, booktitle, pages, year, address, journal, volume, number, month, school, chapter) FROM '/Users/prajogotio/proj/cz4031/dbstuffsocool31/dblp_xml_parser/publication.csv' CSV;
 
@@ -94,6 +93,18 @@ JOIN Publication cite ON cite.key = trim(ccsv.citation_key);
 
 DROP TABLE CitationCSV;
 
-*/
+-- Load note.csv.
+DROP TABLE IF EXISTS NoteCSV;
+CREATE TEMP TABLE NoteCSV (
+  publication_key TEXT NOT NULL,
+  note TEXT NOT NULL
+);
+COPY NoteCSV FROM '/Users/prajogotio/proj/cz4031/dbstuffsocool31/dblp_xml_parser/note.csv' CSV;
 
+-- Populate PublicationNote table.
+INSERT INTO PublicationNote
+SELECT pub.publication_id, csv.note
+FROM NoteCSV csv
+JOIN Publication pub ON pub.key = csv.publication_key;
 
+DROP TABLE NoteCSV;
