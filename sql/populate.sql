@@ -1,3 +1,4 @@
+/*
 -- Populate publication table using publication.csv.
 COPY Publication(category, key, mdate, publtype, reviewid, rating, title, booktitle, pages, year, address, journal, volume, number, month, school, chapter) FROM '/Users/prajogotio/proj/cz4031/dbstuffsocool31/dblp_xml_parser/publication.csv' CSV;
 
@@ -92,3 +93,7 @@ JOIN Publication pub ON pub.key = trim(ccsv.publication_key)
 JOIN Publication cite ON cite.key = trim(ccsv.citation_key);
 
 DROP TABLE CitationCSV;
+
+*/
+
+

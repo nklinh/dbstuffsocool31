@@ -48,7 +48,7 @@ CREATE TABLE PublicationEditor (
 DROP TABLE IF EXISTS Citation;
 CREATE TABLE Citation (
   publication_id INT NOT NULL,
-  citation_key TEXT NOT NULL
+  citation_id INT NOT NULL
 );
 
 DROP TABLE IF EXISTS PublicationUrl;
@@ -69,8 +69,3 @@ CREATE TABLE PublicationISBN (
   isbn TEXT NOT NULL
 );
 
-DROP TABLE IF EXISTS PublicationCrossReference;
-CREATE TABLE PublicationCrossReference (
-  publication_id INT NOT NULL,
-  crossref_key TEXT NOT NULL
-);
