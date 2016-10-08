@@ -1,0 +1,210 @@
+2. Queries
+Question 1:
+SELECT DISTINCT category,COUNT(category) FROM publication GROUP BY category;
+   category    |  count  
+---------------+---------
+ inproceedings | 1856563
+ book          |   12679
+ incollection  |   39320
+ article       | 1506852
+(4 rows)
+
+Time: 2280.088 ms
+
+Question 2:
+SELECT DISTINCT A.name,COUNT(PA.author_id) 
+FROM publicationauthor PA, author A 
+WHERE PA.author_id = A.author_id GROUP BY A.name ORDER BY COUNT(PA.author_id) DESC LIMIT 10;
+         name          | count 
+-----------------------+-------
+  H. Vincent Poor      |  1303
+  Wei Zhang            |   984
+  Wei Wang             |   983
+  Wen Gao 0001         |   975
+  Philip S. Yu         |   970
+  Lajos Hanzo          |   909
+  Mohamed-Slim Alouini |   905
+  Thomas S. Huang      |   892
+  Yu Zhang             |   875
+  Jing Li              |   870
+(10 rows)
+
+Time: 421333.079 ms
+
+Question 3a:
+SELECT P.title as Title, A.name as Author, P.year as Year 
+FROM publication P, publicationauthor PA, author A 
+WHERE A.name = ' Takanobu Otsuka' AND A.author_id=PA.author_id AND PA.publication_id=P.publication_id AND P.year=2012;
+                                        title                                         |      author      | year 
+--------------------------------------------------------------------------------------+------------------+------
+ Evaluation of the Reputation Network Using Realistic Distance between Facebook Data. |  Takanobu Otsuka | 2012
+ Innovating multiagent algorithms for smart city: An overview.                        |  Takanobu Otsuka | 2012
+ Teaching Method Based on Learning Networks.                                          |  Takanobu Otsuka | 2012
+(3 rows)
+
+Time: 2507.413 ms
+
+Question 3b:
+SELECT A.name,P.year,P.title FROM author A, publicationauthor PA, publication P WHERE A.author_id=PA.author_id AND PA.publication_id=P.publication_id AND A.name = ' Florian Skopik' AND P.year=2015 AND P.key LIKE 'conf/cybersa%';
+      name       | year |                                           title                                            
+-----------------+------+--------------------------------------------------------------------------------------------
+  Florian Skopik | 2015 | On demand for situational awareness for preventing attacks on the smart grid.
+  Florian Skopik | 2015 | Establishing national cyber situational awareness through incident information clustering.
+  Florian Skopik | 2015 | Beyond gut instincts: Understanding, rating and comparing self-learning IDSs.
+(3 rows)
+
+Time: 2499.611 ms
+
+Question 3c:
+SELECT A.name 
+FROM author A, publicationauthor PA, publication P 
+WHERE A.author_id=PA.author_id AND PA.publication_id=P.publication_id AND P.year=2015 AND P.key LIKE 'conf/cybersa%' GROUP BY A.name HAVING COUNT(P.key)>=2;
+              name               
+---------------------------------
+  Jens Myrup Pedersen
+  Roman Fiedler
+  Matija Stevanovic
+  Giuseppe Settanni
+  Thor M. T. Larsen
+  Dimitris Tsaptsinos
+  Aderonke Favour-Bethy Thompson
+  Sarmistha Neogy
+  Eckhard Pfluegel
+  Boniface Kayode Alese
+  Radu S. Pirscoveanu
+  Shahzad Memon
+  Lachhman Das Dhomeja
+  Markus Wurzenberger
+  Kamran Dahri
+  Alexandre Czech
+  Florian Skopik
+  Steven S. Hansen
+(18 rows)
+
+Time: 3102.825 ms
+
+Question 4a:
+SELECT A.name 
+FROM author A, publicationauthor PA, publication P 
+WHERE A.author_id=PA.author_id AND PA.publication_id=P.publication_id AND P.key LIKE '%sigmod%' AND A.name IN (
+	SELECT A.name 
+	FROM author A, publicationauthor PA, publication P 
+	WHERE A.author_id=PA.author_id AND PA.publication_id=P.publication_id AND P.key LIKE '%pvldb%' GROUP BY A.name HAVING COUNT(P.key)>=10) 
+GROUP BY A.name HAVING COUNT(P.key)>=10;
+          name          
+------------------------
+  Mourad Ouzzani
+  Lei Chen 0002
+  Neoklis Polyzotis
+  Michael Stonebraker
+  Gautam Das
+  Amr El Abbadi
+  Volker Markl
+  Beng Chin Ooi
+  Cong Yu
+  Hector Garcia-Molina
+  Donald Kossmann
+  Gustavo Alonso
+  Jianzhong Li
+  AnHai Doan
+  Philip S. Yu
+  Johannes Gehrke
+  Gerhard Weikum
+  Renée J. Miller
+  Christoph Koch 0001
+  Wenfei Fan
+  Nick Koudas
+  Guoliang Li
+  Gao Cong
+  H. V. Jagadish
+  Tim Kraska
+  Paolo Papotti
+  Stanley B. Zdonik
+  Surajit Chaudhuri
+  Vivek R. Narasayya
+  Shivnath Babu
+  Amol Deshpande
+  Michael J. Franklin
+  Xin Luna Dong
+  Jeffrey Xu Yu
+  Anastasia Ailamaki
+  Christopher Ré
+  Alfons Kemper
+  Joseph M. Hellerstein
+  Nikos Mamoulis
+  Jianhua Feng
+  Xifeng Yan
+  David Maier
+  Samuel Madden
+  Alon Y. Halevy
+  Jeffrey F. Naughton
+  Dan Suciu
+  M. Tamer Özsu
+  Xuemin Lin
+  Ugur Çetintemel
+  Jignesh M. Patel
+  Thomas Neumann 0001
+  Divesh Srivastava
+  Jiawei Han
+  Ihab F. Ilyas
+  Divyakant Agrawal
+  Tova Milo
+  Elke A. Rundensteiner
+  Christian S. Jensen
+  Magdalena Balazinska
+  Kian-Lee Tan
+  Anthony K. H. Tung
+  Stefan Manegold
+(62 rows)
+
+Time: 7187.690 ms
+
+Question 4b:
+SELECT A.name 
+FROM author A, publicationauthor PA, publication P 
+WHERE A.author_id=PA.author_id AND PA.publication_id=P.publication_id AND P.key LIKE '%pvldb%' AND A.name NOT IN (
+	SELECT A.name 
+	FROM author A, publicationauthor PA, publication P 
+	WHERE A.author_id=PA.author_id AND PA.publication_id=P.publication_id AND P.key 	LIKE '%kdd%') 
+GROUP BY A.name HAVING COUNT(P.key)>=10;
+
+             name             
+------------------------------
+  Michael J. Franklin
+  Anastasia Ailamaki
+  Saravanan Thirumuruganathan
+  Renée J. Miller
+  Christopher Ré
+  Alfons Kemper
+  Thomas Neumann 0001
+  Stefan Manegold
+  Mourad Ouzzani
+  Amr El Abbadi
+  Volker Markl
+  Eugene Wu 0002
+  Christoph Koch 0001
+  Tim Kraska
+  Vivek R. Narasayya
+  Amol Deshpande
+  Samuel Madden
+  Jeffrey F. Naughton
+  Ippokratis Pandis
+  Jignesh M. Patel
+  Tova Milo
+  Magdalena Balazinska
+  Michael Stonebraker
+  Michael Benedikt
+  AnHai Doan
+  Wenfei Fan
+  Ziyang Liu
+  Ihab F. Ilyas
+  Jens Dittrich
+  Daniel Deutch
+  David Maier
+  Divyakant Agrawal
+  Neoklis Polyzotis
+(33 rows)
+
+Time: 9139.216 ms
+
+Question 5:
