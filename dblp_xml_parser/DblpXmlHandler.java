@@ -27,7 +27,7 @@ public class DblpXmlHandler extends DefaultHandler {
 
   private final int hashMod;
   private final int acceptHash;
-  private int numOfEntries = 0;
+  private int entryId = 0;
   static {
     fieldNames = new ArrayList<>();
     fieldNames.add(PUBLICATION_TYPE_FIELD_NAME);
@@ -113,7 +113,7 @@ public class DblpXmlHandler extends DefaultHandler {
     if (isPublicationCloseTag(qName)) {
       isPublication = false;
       if (isEntryAccepted()) flushValues();
-      ++numOfEntries;
+      ++entryId;
     } else {
       if (!isPublication || !isEntryAccepted()) return;
       String pubKey = fieldValues.get("key");
@@ -127,7 +127,7 @@ public class DblpXmlHandler extends DefaultHandler {
   }
 
   private boolean isEntryAccepted() {
-    return hashMod == NO_HASH || numOfEntries % hashMod == acceptHash;
+    return hashMod == NO_HASH || entryId % hashMod == acceptHash;
   }
 
   private boolean isPublicationStartTag(String qName) {
