@@ -208,3 +208,61 @@ GROUP BY A.name HAVING COUNT(P.key)>=10;
 Time: 9139.216 ms
 
 Question 5:
+SELECT                                                                                
+CASE
+	when year = null then 'NULL'                                                                        	
+	when year between 1970 and 1974 then '1970-1974'                                                	
+	when year between 1975 and 1979 then '1975-1979'                                                	
+	when year between 1980 and 1984 then '1980-1984'                                                	
+	when year between 1985 and 1989 then '1985-1989'                                                	
+	when year between 1990 and 1994 then '1990-1994'                                                	
+	when year between 1995 and 1999 then '1995-1999'                                                	
+	when year between 2000 and 2004 then '2000-2004'                                                	
+	when year between 2005 and 2009 then '2005-2009'                                                	
+	when year between 2010 and 2014 then '2010-2014'                                                	
+	when year between 2015 and 2019 then '2015-2019'                                        
+	end as years, count(*) 
+FROM publication                                                                             
+GROUP BY years;
+   years   |  count  
+-----------+---------
+ 2005-2009 |  860247
+           |   11870
+ 1970-1974 |   13486
+ 1995-1999 |  250123
+ 1985-1989 |   72824
+ 2010-2014 | 1158637
+ 2015-2019 |  387073
+ 1980-1984 |   38638
+ 2000-2004 |  451546
+ 1990-1994 |  148615
+ 1975-1979 |   22355
+(11 rows)
+
+Time: 6602.847 ms
+
+Question 6:
+
+SELECT A.name,COUNT(PA2.author_id) AS Collaborators_count 
+FROM author A, publicationauthor PA1, publicationauthor PA2 
+WHERE PA1.author_id!=PA2.author_id AND PA1.publication_id=PA2.publication_id AND A.author_id=PA1.author_id 
+GROUP BY A.name 
+ORDER BY COUNT(PA2.author_id) DESC 
+LIMIT 10;                                                       
+       name        | collaborators_count 
+-------------------+---------------------
+  Wen Gao 0001     |                3454
+  H. Vincent Poor  |                3200
+  Wei Zhang        |                3018
+  Wei Wang         |                2959
+  Jing Li          |                2752
+  Hai Jin          |                2729
+  Paul M. Thompson |                2640
+  Yu Zhang         |                2574
+  Philip S. Yu     |                2568
+  Leonard Barolli  |                2545
+(10 rows)
+
+Time: 1208185.576 ms (approx 20min)
+
+Question 7:
