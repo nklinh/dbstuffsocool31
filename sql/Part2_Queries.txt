@@ -12,24 +12,27 @@ SELECT DISTINCT category,COUNT(category) FROM publication GROUP BY category;
 Time: 2280.088 ms
 
 Question 2:
-SELECT DISTINCT A.name,COUNT(PA.author_id) 
-FROM publicationauthor PA, author A 
-WHERE PA.author_id = A.author_id GROUP BY A.name ORDER BY COUNT(PA.author_id) DESC LIMIT 10;
-         name          | count 
------------------------+-------
-  H. Vincent Poor      |  1303
-  Wei Zhang            |   984
-  Wei Wang             |   983
-  Wen Gao 0001         |   975
-  Philip S. Yu         |   970
-  Lajos Hanzo          |   909
-  Mohamed-Slim Alouini |   905
-  Thomas S. Huang      |   892
-  Yu Zhang             |   875
-  Jing Li              |   870
+SELECT q1.name AS author, q2.publication_count 
+FROM (SELECT * FROM author) as q1, (
+	SELECT author_id, COUNT(*) AS publication_count 
+	FROM publicationauthor 
+	GROUP BY author_id) as q2 
+WHERE q1.author_id=q2.author_id ORDER BY publication_count DESC LIMIT 10;
+        author         | publication_count 
+-----------------------+-------------------
+  H. Vincent Poor      |              1303
+  Wei Zhang            |               984
+  Wei Wang             |               983
+  Wen Gao 0001         |               975
+  Philip S. Yu         |               970
+  Lajos Hanzo          |               909
+  Mohamed-Slim Alouini |               905
+  Thomas S. Huang      |               892
+  Yu Zhang             |               875
+  Jing Li              |               870
 (10 rows)
 
-Time: 421333.079 ms
+Time: 25968.384 ms
 
 Question 3a:
 SELECT P.title as Title, A.name as Author, P.year as Year 
