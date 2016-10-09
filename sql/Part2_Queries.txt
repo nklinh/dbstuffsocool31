@@ -245,6 +245,35 @@ ORDER BY years;
 
 Time: 6705.179 ms
 
+An alternative way: It is shorter but takes more time to run. 
+  Also, it does not take care of the null year cases.
+
+WITH ranges AS (
+  SELECT (five*5)::text||'-'||(five*5+4)::text AS range,         
+    five*5 AS r_min, five*5+4 AS r_max
+  FROM generate_series(394, 403) AS f(five))
+SELECT r.range, count(p.*)
+  FROM ranges r
+  LEFT JOIN publication p ON p.year BETWEEN r.r_min AND r.r_max
+  GROUP BY r.range
+  ORDER BY r.range;
+
+   range   |  count  
+-----------+---------
+ 1970-1974 |   13486
+ 1975-1979 |   22355
+ 1980-1984 |   38662
+ 1985-1989 |   72984
+ 1990-1994 |  149043
+ 1995-1999 |  250333
+ 2000-2004 |  451900
+ 2005-2009 |  860426
+ 2010-2014 | 1160352
+ 2015-2019 |  401712
+(10 rows)
+
+Time: 11896.636 ms
+
 Question 6:
 
 SELECT q1.name AS author, q2.collaborators_count 
@@ -292,3 +321,18 @@ ORDER BY count(*) DESC LIMIT 10;
 (10 rows)
 
 Time: 5017.787 ms
+
+Question 8:
+SELECT COUNT(*) FROM publication WHERE year BETWEEN 1960 AND 1969;
+ count 
+-------
+ 10358
+(1 row)
+
+Time: 1672.730 ms
+
+SELECT title FROM publication WHERE year BETWEEN 1960 AND 1969;
+<output too long..>
+Time: 1370.248 ms
+
+Question 9:
