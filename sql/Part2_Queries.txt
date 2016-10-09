@@ -243,6 +243,7 @@ ORDER BY years;
            |   11870
 (11 rows)
 
+Time: 6705.179 ms
 
 An alternative way: It is shorter but takes more time to run. 
   Also, it does not take care of the null year cases.
@@ -272,9 +273,6 @@ SELECT r.range, count(p.*)
 (10 rows)
 
 Time: 11896.636 ms
-
-
-Time: 6705.179 ms
 
 Question 6:
 
@@ -323,3 +321,18 @@ ORDER BY count(*) DESC LIMIT 10;
 (10 rows)
 
 Time: 5017.787 ms
+
+Question 8:
+SELECT COUNT(*) FROM publication WHERE year BETWEEN 1960 AND 1969;
+ count 
+-------
+ 10358
+(1 row)
+
+Time: 1672.730 ms
+
+SELECT title FROM publication WHERE year BETWEEN 1960 AND 1969;
+<output too long..>
+Time: 1370.248 ms
+
+Question 9:
