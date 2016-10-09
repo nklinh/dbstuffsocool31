@@ -266,3 +266,23 @@ LIMIT 10;
 Time: 1208185.576 ms (approx 20min)
 
 Question 7:
+SELECT A.name, COUNT(*) AS publication_count 
+FROM author A, publication P, publicationauthor PA 
+WHERE P.publication_id=PA.publication_id AND A.author_id=PA.author_id AND (P.key LIKE 'journals/%' OR P.key LIKE 'conf/%') AND P.year BETWEEN 2012 AND 2016 AND P.title LIKE '%data%' 
+GROUP BY A.name 
+ORDER BY count(*) DESC LIMIT 10;
+        name        | publication_count 
+--------------------+-------------------
+  Francisco Herrera |                35
+  Zhu Han           |                30
+  Vince D. Calhoun  |                26
+  Wolfgang Lehner   |                25
+  Tao Li            |                24
+  Jun Liu           |                24
+  João Gama         |                23
+  Jianzhong Li      |                23
+  Witold Pedrycz    |                23
+  Yong Chen         |                23
+(10 rows)
+
+Time: 5017.787 ms
