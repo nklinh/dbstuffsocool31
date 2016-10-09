@@ -112,7 +112,7 @@ public class DblpXmlHandler extends DefaultHandler {
   public void endElement(String uri, String localName, String qName) throws SAXException {
     if (isPublicationCloseTag(qName)) {
       isPublication = false;
-      if (isEntryAccepted()) flushValues();
+      flushValues();
       ++entryId;
     } else {
       if (!isPublication || !isEntryAccepted()) return;
@@ -158,17 +158,19 @@ public class DblpXmlHandler extends DefaultHandler {
   }
 
   private void flushValues() {
-    PrintWriter out = writers.get("publication");
-    int count = 0;
-    for (String fieldName : fieldNames) {
-      String value = fieldValues.get(fieldName);
-      if (value != null) {
-        out.print(String.format("\"%s\"", escapeQuote(value)));
+    if (isEntryAccepted()) {
+      PrintWriter out = writers.get("publication");
+      int count = 0;
+      for (String fieldName : fieldNames) {
+        String value = fieldValues.get(fieldName);
+        if (value != null) {
+          out.print(String.format("\"%s\"", escapeQuote(value)));
+        }
+        if (count != fieldNames.size()-1) out.print(",");
+        ++count;
       }
-      if (count != fieldNames.size()-1) out.print(",");
-      ++count;
+      out.println();
     }
-    out.println();
     fieldValues.clear();
   }
 
