@@ -1,0 +1,156 @@
+Timing is on.
+Questions 1:
+   category    | count  
+---------------+--------
+ incollection  |   9855
+ inproceedings | 466804
+ book          |   3213
+ article       | 378479
+(4 rows)
+
+Time: 261.089 ms
+Question 2:
+        author         | publication_count 
+-----------------------+-------------------
+  H. Vincent Poor      |               339
+  Wei Zhang            |               275
+  Wei Wang             |               253
+  Wen Gao 0001         |               243
+  Philip S. Yu         |               239
+  Lajos Hanzo          |               234
+  Elisa Bertino        |               230
+  Thomas S. Huang      |               228
+  Tao Li               |               227
+  Mohamed-Slim Alouini |               227
+(10 rows)
+
+Time: 3234.833 ms
+Question 3a:
+                    title                    |      author      | year 
+---------------------------------------------+------------------+------
+ Teaching Method Based on Learning Networks. |  Takanobu Otsuka | 2012
+(1 row)
+
+Time: 369.285 ms
+Question 3b:
+ name | year | title 
+------+------+-------
+(0 rows)
+
+Time: 151.956 ms
+Question 3c:
+         name         
+----------------------
+  Dimitris Tsaptsinos
+  Eckhard Pfluegel
+(2 rows)
+
+Time: 145.482 ms
+Question 4a:
+        name        
+--------------------
+  Divesh Srivastava
+(1 row)
+
+Time: 398.539 ms
+Question 4b:
+        name        
+--------------------
+  Samuel Madden
+  Divesh Srivastava
+(2 rows)
+
+Time: 602.175 ms
+Question 5:
+Method 1:
+   years   | count  
+-----------+--------
+ 1970-1974 |   3394
+ 1975-1979 |   5620
+ 1980-1984 |   9616
+ 1985-1989 |  18110
+ 1990-1994 |  37269
+ 1995-1999 |  62275
+ 2000-2004 | 113199
+ 2005-2009 | 214652
+ 2010-2014 | 291043
+ 2015-2019 | 100093
+           |   3080
+(11 rows)
+
+Time: 740.557 ms
+Method 2:
+   range   | count  
+-----------+--------
+ 1970-1974 |   3394
+ 1975-1979 |   5620
+ 1980-1984 |   9616
+ 1985-1989 |  18110
+ 1990-1994 |  37269
+ 1995-1999 |  62275
+ 2000-2004 | 113199
+ 2005-2009 | 214652
+ 2010-2014 | 291043
+ 2015-2019 | 100093
+(10 rows)
+
+Time: 2945.726 ms
+Question 6:
+   author    | collaborators_count 
+-------------+---------------------
+  Wei Zhang  |                 684
+  Wei Wang   |                 647
+  Yang Liu   |                 564
+  Li Zhang   |                 541
+  Lei Zhang  |                 521
+  Yu Zhang   |                 518
+  Peng Zhang |                 516
+  Tao Wang   |                 515
+  Jing Li    |                 514
+  Wei Li     |                 497
+(10 rows)
+
+Time: 13271.532 ms
+Question 7:
+          name          | publication_count 
+------------------------+-------------------
+  Wolfgang Lehner       |                 9
+  Reda Alhajj           |                 9
+  Marco Mattavelli      |                 8
+  Yi Yang               |                 8
+  Ting Wang             |                 7
+  Witold Pedrycz        |                 7
+  Vince D. Calhoun      |                 7
+  Hai Jin               |                 7
+  Taghi M. Khoshgoftaar |                 7
+  Jörn W. Janneck       |                 7
+(10 rows)
+
+Time: 398.923 ms
+Question 8:
+Question: Find the top 10 authors with the largerst
+number of publications in a selected period of years.
+        author         | publication_count 
+-----------------------+-------------------
+  Boleslaw Sobocinski  |                12
+  Ivo Thomas           |                10
+  George E. Forsythe   |                 9
+  Patrick C. Fischer   |                 7
+  Arthur Gill          |                 7
+  King-Sun Fu          |                 7
+  Phillip A. Bello     |                 7
+  Peter Naur           |                 7
+  Juris Hartmanis      |                 7
+  Henry C. Thacher Jr. |                 7
+(10 rows)
+
+Time: 191.890 ms
+Question 9:
+Question: Find the pair of authors who produced
+the most number of papers together.
+    author_1     |      author_2      | papers_count 
+-----------------+--------------------+--------------
+  Irith Pomeranz |  Sudhakar M. Reddy |          106
+(1 row)
+
+Time: 14893.168 ms
