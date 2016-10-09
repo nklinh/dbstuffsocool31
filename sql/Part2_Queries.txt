@@ -243,27 +243,29 @@ Time: 6602.847 ms
 
 Question 6:
 
-SELECT A.name,COUNT(PA2.author_id) AS Collaborators_count 
-FROM author A, publicationauthor PA1, publicationauthor PA2 
-WHERE PA1.author_id!=PA2.author_id AND PA1.publication_id=PA2.publication_id AND A.author_id=PA1.author_id 
-GROUP BY A.name 
-ORDER BY COUNT(PA2.author_id) DESC 
-LIMIT 10;                                                       
-       name        | collaborators_count 
--------------------+---------------------
-  Wen Gao 0001     |                3454
-  H. Vincent Poor  |                3200
-  Wei Zhang        |                3018
-  Wei Wang         |                2959
-  Jing Li          |                2752
-  Hai Jin          |                2729
-  Paul M. Thompson |                2640
-  Yu Zhang         |                2574
-  Philip S. Yu     |                2568
-  Leonard Barolli  |                2545
+SELECT q1.name AS author, q2.collaborators_count 
+FROM (SELECT * FROM author) as q1, (
+	SELECT PA1.author_id AS author_id,COUNT(DISTINCT PA2.author_id) AS collaborators_count 
+	FROM publicationauthor PA1, publicationauthor PA2 
+	WHERE PA1.author_id!=PA2.author_id AND PA1.publication_id=PA2.publication_id 
+	GROUP BY PA1.author_id) as q2 
+WHERE q1.author_id=q2.author_id 
+ORDER BY collaborators_count DESC LIMIT 10;
+   author   | collaborators_count 
+------------+---------------------
+  Wei Wang  |                2104
+  Wei Zhang |                1870
+  Wei Li    |                1715
+  Yang Liu  |                1591
+  Jing Li   |                1575
+  Jun Wang  |                1559
+  Li Zhang  |                1546
+  Yu Zhang  |                1505
+  Lei Zhang |                1467
+  Lei Wang  |                1458
 (10 rows)
 
-Time: 1208185.576 ms (approx 20min)
+Time: 121951.713 ms
 
 Question 7:
 SELECT A.name, COUNT(*) AS publication_count 
