@@ -9,7 +9,13 @@ public static void main(String[] args) {
     try {
       SAXParserFactory factory = SAXParserFactory.newInstance();
       SAXParser saxParser = factory.newSAXParser();
-      DblpXmlHandler handler = new DblpXmlHandler();
+      int hashMod = DblpXmlHandler.NO_HASH;
+      int acceptHash = DblpXmlHandler.ACCEPT_ALL;
+      if (args.length == 3) {
+        hashMod = Integer.parseInt(args[1]);
+        acceptHash = Integer.parseInt(args[2]);
+      }
+      DblpXmlHandler handler = new DblpXmlHandler(hashMod, acceptHash);
       double startTime = System.currentTimeMillis();
       saxParser.parse(args[0], handler);
       handler.close();

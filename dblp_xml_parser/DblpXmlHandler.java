@@ -10,6 +10,8 @@ import java.io.PrintWriter;
 import java.io.File;
 
 public class DblpXmlHandler extends DefaultHandler {
+  public static final int NO_HASH = 0;
+  public static final int ACCEPT_ALL = 0;
   private static final String PUBLICATION_TYPE_FIELD_NAME = "category";
   private static final String ARTICLE_TAG_NAME = "article";
   private static final String BOOK_TAG_NAME = "book";
@@ -22,6 +24,10 @@ public class DblpXmlHandler extends DefaultHandler {
   private String currentField;
   private Map<String, String> fieldValues;
   private static final ArrayList<String> fieldNames;
+
+  private final int hashMod;
+  private final int acceptHash;
+  private int numOfEntries = 0;
   static {
     fieldNames = new ArrayList<>();
     fieldNames.add(PUBLICATION_TYPE_FIELD_NAME);
@@ -65,9 +71,15 @@ public class DblpXmlHandler extends DefaultHandler {
     tagNames.add(INCOLLECTION_TAG_NAME);
   }
 
-  public DblpXmlHandler() {
+  public DblpXmlHandler(int hashMod, int acceptHash) {
     fieldValues = new HashMap<>();
+    this.hashMod = hashMod;
+    this.acceptHash = acceptHash;
     InitializeFiles();
+  }
+
+  public DblpXmlHandler() {
+    this(NO_HASH, ACCEPT_ALL);
   }
 
   private void InitializeFiles() {
@@ -100,9 +112,10 @@ public class DblpXmlHandler extends DefaultHandler {
   public void endElement(String uri, String localName, String qName) throws SAXException {
     if (isPublicationCloseTag(qName)) {
       isPublication = false;
-      flushValues();
+      if (isEntryAccepted()) flushValues();
+      ++numOfEntries;
     } else {
-      if (!isPublication) return;
+      if (!isPublication || !isEntryAccepted()) return;
       String pubKey = fieldValues.get("key");
       for (String relationField : relationFields) {
         if (!qName.equals(relationField)) continue;
@@ -111,6 +124,10 @@ public class DblpXmlHandler extends DefaultHandler {
         fieldValues.put(relationField, "");
       }
     }
+  }
+
+  private boolean isEntryAccepted() {
+    return hashMod == NO_HASH || numOfEntries % hashMod == acceptHash;
   }
 
   private boolean isPublicationStartTag(String qName) {
