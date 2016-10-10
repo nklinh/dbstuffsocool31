@@ -1,3 +1,4 @@
+---------------------------------START QN 5-----------------------------------
 -- Question 5
 -- Twice faster?
 SELECT
@@ -70,7 +71,8 @@ Generated Query Plan:
 (13 rows)
 */
 
-
+--------------------------------- END OF QN 5 --------------------------------
+---------------------------------START QN 6-----------------------------------
 
 
 -- Question 6
@@ -140,3 +142,26 @@ Down from previous timing using FROM ... WHERE ... shown below:
 
 Time: 187707.260 ms
 */
+
+-----------------------------------------------------------------------------
+-- Qn 4b
+-- LEFT JOIN and IS NULL check is faster than NOT IN
+SELECT author_1.name
+FROM (
+  SELECT a.author_id, a.name
+  FROM Author a
+  JOIN PublicationAuthor pa ON pa.author_id = a.author_id
+  JOIN Publication p ON p.publication_id = pa.publication_id
+  WHERE p.key LIKE '%pvldb%'
+) author_1
+LEFT JOIN (
+  SELECT a.author_id, a.name
+  FROM Author a
+  JOIN PublicationAuthor pa ON pa.author_id = a.author_id
+  JOIN Publication p ON p.publication_id = pa.publication_id
+  WHERE p.key LIKE '%kdd%'
+) author_2
+ON author_1.author_id = author_2.author_id
+WHERE author_2.author_id IS NULL
+GROUP BY author_1.name
+HAVING COUNT(*) >= 10;
