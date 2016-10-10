@@ -6,10 +6,6 @@ Q5 optimized:
 No index: 2s
 With index: 2s
 
-Q3c:
-No index: 3s
-With index: 1s
-
 Q6:
 optimized: 2min
 original: 2min
@@ -25,6 +21,12 @@ No index: 1747.527ms
 
 CREATE INDEX pub_year_key_index ON Publication(year, key);
 Time: 635.963ms
+
+Q3c:
+No index: 882.029ms
+
+CREATE INDEX pub_year_confcybersa_index ON Publication(year, (key LIKE 'conf/cybersa%'));
+Index on year and subtring: 320.623ms;
 
 Q4a:
 No index: 5016.007ms
