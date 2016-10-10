@@ -2,10 +2,6 @@ Q5 not optimized:
 No index: 5s
 With index: 4s
 
-Q5 optimized:
-No index: 2s
-With index: 2s
-
 Q6:
 optimized: 2min
 original: 2min
@@ -41,3 +37,9 @@ No index: 2203.202ms
 CREATE INDEX pub_key_pvldb_index ON Publication((key LIKE '%pvldb%'));
 CREATE INDEX pub_key_kdd_index ON Publication((key LIKE '%kdd%'));
 Index on key substring: 337.124ms
+
+Q5 optimized:
+No index: 1588.643ms
+
+CREATE INDEX pub_year_index ON Publication (year);
+Index on year: 2344.984ms
