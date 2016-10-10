@@ -33,3 +33,9 @@ CREATE INDEX pub_key_sigmod_index ON Publication((key LIKE '%sigmod%'));
 CREATE INDEX pub_key_pvldb_index ON Publication((key LIKE '%pvldb%'));
 Index on key substring: 117.804ms
 
+Q4b Optimized:
+No index: 2203.202ms
+
+CREATE INDEX pub_key_pvldb_index ON Publication((key LIKE '%pvldb%'));
+CREATE INDEX pub_key_kdd_index ON Publication((key LIKE '%kdd%'));
+Index on key substring: 337.124ms
