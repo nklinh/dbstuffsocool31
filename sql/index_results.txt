@@ -14,13 +14,13 @@ Q4:
 optimized: 5s
 original: 32s
 
-Q3a:
+-----------------------------------------------
 
 Q3b:
-No index: 1747.527ms
+No index: 729.541ms
 
 CREATE INDEX pub_year_key_index ON Publication(year, key);
-Time: 635.963ms
+Time: 627.623ms
 
 Q3c:
 No index: 882.029ms
