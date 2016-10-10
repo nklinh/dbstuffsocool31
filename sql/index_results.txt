@@ -1,0 +1,35 @@
+Q5 not optimized:
+No index: 5s
+With index: 4s
+
+Q5 optimized:
+No index: 2s
+With index: 2s
+
+Q3c:
+No index: 3s
+With index: 1s
+
+Q6:
+optimized: 2min
+original: 2min
+
+Q4:
+optimized: 5s
+original: 32s
+
+Q3a:
+
+Q3b:
+No index: 1747.527ms
+
+CREATE INDEX pub_year_key_index ON Publication(year, key);
+Time: 635.963ms
+
+Q4a:
+No index: 
+
+CREATE INDEX pub_key_index ON Publication(key);
+Index on key: 
+
+
