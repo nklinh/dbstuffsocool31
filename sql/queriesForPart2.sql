@@ -2,7 +2,7 @@
 \timing on
 
 \echo Questions 1:
-SELECT DISTINCT category,COUNT(category) 
+SELECT DISTINCT category, COUNT(publication_id) 
 FROM publication 
 GROUP BY category;
 
@@ -136,8 +136,8 @@ WHERE P.publication_id=PA.publication_id
 	AND A.author_id=PA.author_id 
 	AND (P.key LIKE 'journals/%' OR P.key LIKE 'conf/%') 
 	AND P.year BETWEEN 2012 AND 2016 
-	AND P.title LIKE '%data%' 
-GROUP BY A.name 
+	AND LOWER(P.title) LIKE '%data%' 
+GROUP BY A.author_id
 ORDER BY count(*) DESC 
 LIMIT 10;
 
