@@ -43,3 +43,22 @@ No index: 1588.643ms
 
 CREATE INDEX pub_year_index ON Publication (year);
 Index on year: 2344.984ms
+
+Q6:
+
+Q7:
+No index: 103318.001ms
+
+CREATE INDEX pub_key_jour_conf_index ON Publication((key LIKE 'journals/%' OR key LIKE 'journals/%')); ----> 95567.617ms
+
+CREATE INDEX pub_key_jour_index ON Publication((key LIKE 'journals/%'));
+
+CREATE INDEX pub_key_conf_index ON Publication((key LIKE 'conf/%'));
+
+CREATE INDEX pub_year_index ON Publication (year); ----> 106085.355ms
+
+CREATE INDEX pub_title_data_index ON Publication((LOWER(title) LIKE '%data%')); ----> 105954.770ms
+
+CREATE INDEX pub_jour_conf_data_index ON Publication((((key LIKE 'journals/%') OR (key LIKE 'conf/%')) AND (LOWER(title) LIKE '%data%')));
+
+Index: 
