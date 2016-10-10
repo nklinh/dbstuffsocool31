@@ -303,7 +303,7 @@ Time: 121951.713 ms
 Question 7:
 SELECT A.name, COUNT(*) AS publication_count 
 FROM author A, publication P, publicationauthor PA 
-WHERE P.publication_id=PA.publication_id AND A.author_id=PA.author_id AND (P.key LIKE 'journals/%' OR P.key LIKE 'conf/%') AND P.year BETWEEN 2012 AND 2016 AND P.title LIKE '%data%' 
+WHERE P.publication_id=PA.publication_id AND A.author_id=PA.author_id AND (P.key LIKE 'journals/%' OR P.key LIKE 'conf/%') AND P.year BETWEEN 2012 AND 2016 AND LOWER(P.title) LIKE '%data%' 
 GROUP BY A.name 
 ORDER BY count(*) DESC LIMIT 10;
         name        | publication_count 
