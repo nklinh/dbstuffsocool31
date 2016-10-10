@@ -1,6 +1,6 @@
 2. Queries
 Question 1:
-SELECT DISTINCT category,COUNT(category) FROM publication GROUP BY category;
+SELECT DISTINCT category, COUNT(publication_id) FROM publication GROUP BY category;
    category    |  count  
 ---------------+---------
  inproceedings | 1856563
