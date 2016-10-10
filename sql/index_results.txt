@@ -27,9 +27,9 @@ CREATE INDEX pub_year_key_index ON Publication(year, key);
 Time: 635.963ms
 
 Q4a:
-No index: 
+No index: 5016.007ms
 
-CREATE INDEX pub_key_index ON Publication(key);
-Index on key: 
-
+CREATE INDEX pub_key_sigmod_index ON Publication((key LIKE '%sigmod%'));
+CREATE INDEX pub_key_pvldb_index ON Publication((key LIKE '%pvldb%'));
+Index on key substring: 117.804ms
 
