@@ -1,0 +1,275 @@
+Timing is on.
+Questions 1:
+   category    |  count  
+---------------+---------
+ inproceedings | 1867172
+ book          |   12747
+ incollection  |   39523
+ article       | 1513960
+(4 rows)
+
+Time: 1551.261 ms
+
+
+Question 2:
+        author         | publication_count 
+-----------------------+-------------------
+  H. Vincent Poor      |              1307
+  Wei Wang             |               995
+  Wei Zhang            |               993
+  Wen Gao 0001         |               980
+  Philip S. Yu         |               977
+  Lajos Hanzo          |               914
+  Mohamed-Slim Alouini |               912
+  Thomas S. Huang      |               894
+  Yu Zhang             |               882
+  Jing Li              |               873
+(10 rows)
+
+Time: 16394.331 ms
+
+
+Question 3a:
+                                        title                                         |      author      | year 
+--------------------------------------------------------------------------------------+------------------+------
+ Teaching Method Based on Learning Networks.                                          |  Takanobu Otsuka | 2012
+ Evaluation of the Reputation Network Using Realistic Distance between Facebook Data. |  Takanobu Otsuka | 2012
+ Innovating multiagent algorithms for smart city: An overview.                        |  Takanobu Otsuka | 2012
+(3 rows)
+
+Time: 1425.521 ms
+
+
+Question 3b:
+      name       | year |                                           title                                            
+-----------------+------+--------------------------------------------------------------------------------------------
+  Florian Skopik | 2015 | Establishing national cyber situational awareness through incident information clustering.
+  Florian Skopik | 2015 | On demand for situational awareness for preventing attacks on the smart grid.
+  Florian Skopik | 2015 | Beyond gut instincts: Understanding, rating and comparing self-learning IDSs.
+(3 rows)
+
+Time: 736.429 ms
+
+
+Question 3c:
+              name               
+---------------------------------
+  Jens Myrup Pedersen
+  Roman Fiedler
+  Matija Stevanovic
+  Giuseppe Settanni
+  Thor M. T. Larsen
+  Dimitris Tsaptsinos
+  Aderonke Favour-Bethy Thompson
+  Sarmistha Neogy
+  Eckhard Pfluegel
+  Boniface Kayode Alese
+  Radu S. Pirscoveanu
+  Shahzad Memon
+  Lachhman Das Dhomeja
+  Markus Wurzenberger
+  Kamran Dahri
+  Alexandre Czech
+  Florian Skopik
+  Steven S. Hansen
+(18 rows)
+
+Time: 705.408 ms
+
+
+Question 4a:
+          name          
+------------------------
+  Mourad Ouzzani
+  Lei Chen 0002
+  Neoklis Polyzotis
+  Michael Stonebraker
+  Gautam Das
+  Amr El Abbadi
+  Volker Markl
+  Beng Chin Ooi
+  Cong Yu
+  Hector Garcia-Molina
+  Donald Kossmann
+  Gustavo Alonso
+  Jianzhong Li
+  AnHai Doan
+  Philip S. Yu
+  Johannes Gehrke
+  Gerhard Weikum
+  Renée J. Miller
+  Christoph Koch 0001
+  Wenfei Fan
+  Nick Koudas
+  Guoliang Li
+  Gao Cong
+  H. V. Jagadish
+  Tim Kraska
+  Paolo Papotti
+  Stanley B. Zdonik
+  Surajit Chaudhuri
+  Shivnath Babu
+  Vivek R. Narasayya
+  Amol Deshpande
+  Michael J. Franklin
+  Xin Luna Dong
+  Sihem Amer-Yahia
+  Martin L. Kersten
+  Jeffrey Xu Yu
+  Anastasia Ailamaki
+  Christopher Ré
+  Alfons Kemper
+  Joseph M. Hellerstein
+  Nikos Mamoulis
+  Jianhua Feng
+  Xifeng Yan
+  David Maier
+  Samuel Madden
+  Alon Y. Halevy
+  Jeffrey F. Naughton
+  Dan Suciu
+  M. Tamer Özsu
+  Xuemin Lin
+  Ugur Çetintemel
+  Jignesh M. Patel
+  Thomas Neumann 0001
+  Divesh Srivastava
+  Jiawei Han
+  Ihab F. Ilyas
+  Divyakant Agrawal
+  Tova Milo
+  Elke A. Rundensteiner
+  Christian S. Jensen
+  Magdalena Balazinska
+  Kian-Lee Tan
+  Anthony K. H. Tung
+  Stefan Manegold
+(64 rows)
+
+Time: 2723.341 ms
+
+
+Question 4b:
+             name             
+------------------------------
+  Michael J. Franklin
+  Anastasia Ailamaki
+  Saravanan Thirumuruganathan
+  Renée J. Miller
+  Christopher Ré
+  Alfons Kemper
+  Thomas Neumann 0001
+  Stefan Manegold
+  Mourad Ouzzani
+  Amr El Abbadi
+  Volker Markl
+  Eugene Wu 0002
+  Christoph Koch 0001
+  Tim Kraska
+  Vivek R. Narasayya
+  Amol Deshpande
+  Samuel Madden
+  Jeffrey F. Naughton
+  Ippokratis Pandis
+  Jignesh M. Patel
+  Tova Milo
+  Magdalena Balazinska
+  Michael Stonebraker
+  Michael Benedikt
+  AnHai Doan
+  Wenfei Fan
+  Ziyang Liu
+  Ihab F. Ilyas
+  Jens Dittrich
+  Daniel Deutch
+  David Maier
+  Divyakant Agrawal
+  Neoklis Polyzotis
+(33 rows)
+
+Time: 2048.204 ms
+
+
+Question 5:
+ year_range  |  count  
+-------------+---------
+ 1970 - 1974 |   13486
+ 1975 - 1979 |   22355
+ 1980 - 1984 |   38662
+ 1985 - 1989 |   72984
+ 1990 - 1994 |  149043
+ 1995 - 1999 |  250333
+ 2000 - 2004 |  451900
+ 2005 - 2009 |  860426
+ 2010 - 2014 | 1160352
+ 2015 - 2019 |  401712
+(10 rows)
+
+Time: 1726.831 ms
+
+
+Question 6:
+   author   | collaborators_count 
+------------+---------------------
+  Wei Wang  |                2128
+  Wei Zhang |                1892
+  Wei Li    |                1733
+  Yang Liu  |                1613
+  Jing Li   |                1580
+  Jun Wang  |                1564
+  Li Zhang  |                1551
+  Yu Zhang  |                1514
+  Lei Wang  |                1478
+  Lei Zhang |                1469
+(10 rows)
+
+Time: 75759.724 ms
+
+
+Question 7:
+         author         | publication_count 
+------------------------+-------------------
+  Alfredo Cuzzocrea     |                93
+  Sören Auer            |                77
+  Taghi M. Khoshgoftaar |                67
+  Wolfgang Lehner       |                67
+  Wei Zhang             |                58
+  Francisco Herrera     |                57
+  Xin Wang              |                56
+  Zhu Han               |                52
+  Ladjel Bellatreche    |                50
+  Rik Van de Walle      |                50
+(10 rows)
+
+Time: 2844.937 ms
+
+
+Question 8:
+Question: Find the top 10 authors with the largest
+number of publications in a selected period of years.
+        author         | publication_count 
+-----------------------+-------------------
+  Henry C. Thacher Jr. |                37
+  Bernard A. Galler    |                33
+  Boleslaw Sobocinski  |                32
+  Seymour Ginsburg     |                31
+  Juris Hartmanis      |                27
+  Saul Gorn            |                26
+  Harry D. Huskey      |                23
+  Donald E. Knuth      |                22
+  Jeffrey D. Ullman    |                22
+  Ivo Thomas           |                22
+(10 rows)
+
+Time: 836.343 ms
+
+
+Question 9:
+Question: Find the pair of authors who produced
+the most number of papers together.
+    author_1     |      author_2      | papers_count 
+-----------------+--------------------+--------------
+  Irith Pomeranz |  Sudhakar M. Reddy |          425
+(1 row)
+
+Time: 74979.593 ms

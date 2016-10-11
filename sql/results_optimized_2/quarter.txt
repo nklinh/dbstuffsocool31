@@ -1,0 +1,160 @@
+Timing is on.
+Questions 1:
+   category    | count  
+---------------+--------
+ incollection  |   9855
+ inproceedings | 466804
+ book          |   3213
+ article       | 378479
+(4 rows)
+
+Time: 386.905 ms
+
+
+Question 2:
+        author         | publication_count 
+-----------------------+-------------------
+  H. Vincent Poor      |               339
+  Wei Zhang            |               275
+  Wei Wang             |               253
+  Wen Gao 0001         |               243
+  Philip S. Yu         |               239
+  Lajos Hanzo          |               234
+  Elisa Bertino        |               230
+  Thomas S. Huang      |               228
+  Tao Li               |               227
+  Mohamed-Slim Alouini |               227
+(10 rows)
+
+Time: 3643.515 ms
+
+
+Question 3a:
+                    title                    |      author      | year 
+---------------------------------------------+------------------+------
+ Teaching Method Based on Learning Networks. |  Takanobu Otsuka | 2012
+(1 row)
+
+Time: 472.413 ms
+
+
+Question 3b:
+ name | year | title 
+------+------+-------
+(0 rows)
+
+Time: 171.948 ms
+
+
+Question 3c:
+         name         
+----------------------
+  Dimitris Tsaptsinos
+  Eckhard Pfluegel
+(2 rows)
+
+Time: 161.157 ms
+
+
+Question 4a:
+        name        
+--------------------
+  Divesh Srivastava
+(1 row)
+
+Time: 1013.153 ms
+
+
+Question 4b:
+        name        
+--------------------
+  Samuel Madden
+  Divesh Srivastava
+(2 rows)
+
+Time: 554.455 ms
+
+
+Question 5:
+ year_range  | count  
+-------------+--------
+ 1970 - 1974 |   3394
+ 1975 - 1979 |   5620
+ 1980 - 1984 |   9616
+ 1985 - 1989 |  18110
+ 1990 - 1994 |  37269
+ 1995 - 1999 |  62275
+ 2000 - 2004 | 113199
+ 2005 - 2009 | 214652
+ 2010 - 2014 | 291043
+ 2015 - 2019 | 100093
+(10 rows)
+
+Time: 392.204 ms
+
+
+Question 6:
+   author    | collaborators_count 
+-------------+---------------------
+  Wei Zhang  |                 684
+  Wei Wang   |                 647
+  Yang Liu   |                 564
+  Li Zhang   |                 541
+  Lei Zhang  |                 521
+  Yu Zhang   |                 518
+  Peng Zhang |                 516
+  Tao Wang   |                 515
+  Jing Li    |                 514
+  Wei Li     |                 497
+(10 rows)
+
+Time: 17422.555 ms
+
+
+Question 7:
+          author          | publication_count 
+--------------------------+-------------------
+  Alfredo Cuzzocrea       |                33
+  Taghi M. Khoshgoftaar   |                24
+  Wolfgang Lehner         |                19
+  Xin Wang                |                18
+  Amri Napolitano         |                17
+  Wei Zhang               |                16
+  Chao Li                 |                16
+  Athanasios V. Vasilakos |                15
+  Shaolei Ren             |                14
+  Erik Mannens            |                13
+(10 rows)
+
+Time: 750.993 ms
+
+
+Question 8:
+Question: Find the top 10 authors with the largest
+number of publications in a selected period of years.
+        author         | publication_count 
+-----------------------+-------------------
+  Boleslaw Sobocinski  |                12
+  Ivo Thomas           |                10
+  George E. Forsythe   |                 9
+  Patrick C. Fischer   |                 7
+  Arthur Gill          |                 7
+  King-Sun Fu          |                 7
+  Phillip A. Bello     |                 7
+  Peter Naur           |                 7
+  Juris Hartmanis      |                 7
+  Henry C. Thacher Jr. |                 7
+(10 rows)
+
+Time: 224.556 ms
+
+
+Question 9:
+Question: Find the pair of authors who produced
+the most number of papers together.
+    author_1     |      author_2      | papers_count 
+-----------------+--------------------+--------------
+  Irith Pomeranz |  Sudhakar M. Reddy |          106
+(1 row)
+
+Time: 15458.312 ms
