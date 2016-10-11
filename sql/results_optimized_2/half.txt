@@ -8,7 +8,7 @@ Questions 1:
  inproceedings | 933583
 (4 rows)
 
-Time: 667.718 ms
+Time: 673.481 ms
 
 
 Question 2:
@@ -26,17 +26,17 @@ Question 2:
   Elisa Bertino        |               447
 (10 rows)
 
-Time: 9291.106 ms
+Time: 7237.589 ms
 
 
 Question 3a:
                              title                             |      author      | year 
 ---------------------------------------------------------------+------------------+------
- Teaching Method Based on Learning Networks.                   |  Takanobu Otsuka | 2012
  Innovating multiagent algorithms for smart city: An overview. |  Takanobu Otsuka | 2012
+ Teaching Method Based on Learning Networks.                   |  Takanobu Otsuka | 2012
 (2 rows)
 
-Time: 899.010 ms
+Time: 826.077 ms
 
 
 Question 3b:
@@ -46,7 +46,7 @@ Question 3b:
   Florian Skopik | 2015 | On demand for situational awareness for preventing attacks on the smart grid.
 (2 rows)
 
-Time: 325.874 ms
+Time: 353.400 ms
 
 
 Question 3c:
@@ -59,7 +59,7 @@ Question 3c:
   Boniface Kayode Alese
 (5 rows)
 
-Time: 298.393 ms
+Time: 378.800 ms
 
 
 Question 4a:
@@ -75,7 +75,7 @@ Question 4a:
   Amol Deshpande
 (8 rows)
 
-Time: 1674.386 ms
+Time: 1716.810 ms
 
 
 Question 4b:
@@ -91,7 +91,7 @@ Question 4b:
   Magdalena Balazinska
 (8 rows)
 
-Time: 988.470 ms
+Time: 977.394 ms
 
 
 Question 5:
@@ -109,7 +109,7 @@ Question 5:
  2015 - 2019 | 200736
 (10 rows)
 
-Time: 761.313 ms
+Time: 755.390 ms
 
 
 Question 6:
@@ -127,7 +127,7 @@ Question 6:
   Jing Wang |                 856
 (10 rows)
 
-Time: 50488.447 ms
+Time: 37234.875 ms
 
 
 Question 7:
@@ -145,11 +145,11 @@ Question 7:
   Tao Li                |                26
 (10 rows)
 
-Time: 2343.637 ms
+Time: 1424.336 ms
 
 
 Question 8:
-Question: Find the top 10 authors with the largerst
+Question: Find the top 10 authors with the largest
 number of publications in a selected period of years.
          author         | publication_count 
 ------------------------+-------------------
@@ -162,10 +162,10 @@ number of publications in a selected period of years.
   Peter Naur            |                13
   Richard Edwin Stearns |                12
   Jeffrey D. Ullman     |                12
-  George E. Forsythe    |                11
+  Philip M. Lewis II    |                11
 (10 rows)
 
-Time: 689.476 ms
+Time: 404.673 ms
 
 
 Question 9:
@@ -176,4 +176,4 @@ the most number of papers together.
   Irith Pomeranz |  Sudhakar M. Reddy |          219
 (1 row)
 
-Time: 41295.424 ms
+Time: 32442.261 ms

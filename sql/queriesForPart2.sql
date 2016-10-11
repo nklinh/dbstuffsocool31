@@ -151,7 +151,7 @@ ORDER BY publication_count DESC;
 
 
 \echo Question 8:
-\echo Question: Find the top 10 authors with the largerst
+\echo Question: Find the top 10 authors with the largest
 \echo number of publications in a selected period of years.
 SELECT q1.name AS author, q2.publication_count 
 FROM author as q1, (
