@@ -1,10 +1,12 @@
 -- POSTGRESQL for running queries in part 2.
-\timing on
+\timing on 
 
 \echo Questions 1:
 SELECT DISTINCT category, COUNT(publication_id) 
 FROM publication 
 GROUP BY category;
+\echo 
+\echo
 
 
 \echo Question 2:
@@ -17,6 +19,8 @@ FROM author as q1, (
 	LIMIT 10) as q2 
 WHERE q1.author_id=q2.author_id
 ORDER BY publication_count DESC; 
+\echo
+\echo
 
 
 \echo Question 3a:
@@ -26,6 +30,8 @@ WHERE A.name = ' Takanobu Otsuka'
 	AND A.author_id=PA.author_id 
 	AND PA.publication_id=P.publication_id 
 	AND P.year=2012;
+\echo
+\echo
 
 
 \echo Question 3b:
@@ -36,6 +42,8 @@ WHERE A.author_id=PA.author_id
 	AND A.name = ' Florian Skopik' 
 	AND P.year=2015 
 	AND P.key LIKE 'conf/cybersa%';
+\echo
+\echo
 
 
 \echo Question 3c:
@@ -47,6 +55,8 @@ WHERE A.author_id=PA.author_id
 	AND P.key LIKE 'conf/cybersa%' 
 GROUP BY A.name 
 HAVING COUNT(P.key)>=2;
+\echo
+\echo
 
 
 \echo Question 4a:
@@ -64,82 +74,80 @@ WHERE A.author_id=PA.author_id
 		HAVING COUNT(P.key)>=10) 
 GROUP BY A.name 
 HAVING COUNT(P.key)>=10;
+\echo
+\echo
 
 
 \echo Question 4b:
-SELECT A.name 
-FROM author A, publicationauthor PA, publication P 
-WHERE A.author_id=PA.author_id 
-	AND PA.publication_id=P.publication_id 
-	AND P.key LIKE '%pvldb%' 
-	AND A.name NOT IN (
-		SELECT A.name 
-		FROM author A, publicationauthor PA, publication P 
-		WHERE A.author_id=PA.author_id 
-			AND PA.publication_id=P.publication_id 
-			AND P.key 	LIKE '%kdd%') 
-GROUP BY A.name 
-HAVING COUNT(P.key)>=10;
+SELECT author_1.name
+FROM (
+  SELECT a.author_id, a.name
+  FROM Author a
+  JOIN PublicationAuthor pa ON pa.author_id = a.author_id
+  JOIN Publication p ON p.publication_id = pa.publication_id
+  WHERE p.key LIKE '%pvldb%'
+) author_1
+LEFT JOIN (
+  SELECT a.author_id, a.name
+  FROM Author a
+  JOIN PublicationAuthor pa ON pa.author_id = a.author_id
+  JOIN Publication p ON p.publication_id = pa.publication_id
+  WHERE p.key LIKE '%kdd%'
+) author_2
+ON author_1.author_id = author_2.author_id
+WHERE author_2.author_id IS NULL
+GROUP BY author_1.name
+HAVING COUNT(*) >= 10;
+\echo
+\echo
 
 
 \echo Question 5:
-\echo Method 1:
-SELECT                                                                                
-CASE
-	when year = null then 'NULL'                                                                        	
-	when year between 1970 and 1974 then '1970-1974'                                                	
-	when year between 1975 and 1979 then '1975-1979'                                                	
-	when year between 1980 and 1984 then '1980-1984'                                                	
-	when year between 1985 and 1989 then '1985-1989'                                                	
-	when year between 1990 and 1994 then '1990-1994'                                                	
-	when year between 1995 and 1999 then '1995-1999'                                                	
-	when year between 2000 and 2004 then '2000-2004'                                                	
-	when year between 2005 and 2009 then '2005-2009'                                                	
-	when year between 2010 and 2014 then '2010-2014'                                                	
-	when year between 2015 and 2019 then '2015-2019'                                        
-	end as years, count(*) 
-FROM publication                                                                             
-GROUP BY years
-ORDER BY years;
-
-\echo Method 2:
-WITH ranges AS (
-	SELECT (five*5)::text||'-'||(five*5+4)::text AS range,         
-    	five*5 AS r_min, five*5+4 AS r_max
-    FROM generate_series(394, 403) AS f(five))
-SELECT r.range, count(p.*)
-FROM ranges r
-LEFT JOIN publication p ON p.year BETWEEN r.r_min AND r.r_max
-GROUP BY r.range
-ORDER BY r.range;
+SELECT
+  CAST((year - 1970)/5 * 5 + 1970 AS TEXT) || ' - ' ||
+  CAST((year - 1970)/5 * 5 + 1974 AS TEXT) AS year_range, COUNT(publication_id)
+FROM Publication
+WHERE year >= 1970
+GROUP BY (year - 1970)/5
+ORDER BY year_range;
+\echo
+\echo
 
 
 \echo Question 6:
 SELECT q1.name AS author, q2.collaborators_count 
-FROM author as q1, (
-	SELECT PA1.author_id AS author_id,
-		COUNT(DISTINCT PA2.author_id) AS collaborators_count 
-	FROM publicationauthor PA1, publicationauthor PA2 
-	WHERE PA1.author_id!=PA2.author_id 
-		AND PA1.publication_id=PA2.publication_id 
-	GROUP BY PA1.author_id
-	ORDER BY collaborators_count DESC 
-	LIMIT 10) as q2 
-WHERE q1.author_id=q2.author_id 
-ORDER BY collaborators_count DESC;
+FROM author as q1
+JOIN (SELECT PA1.author_id AS author_id,
+             COUNT(DISTINCT PA2.author_id) AS collaborators_count 
+      FROM publicationauthor PA1
+      JOIN publicationauthor PA2
+      ON PA1.author_id!=PA2.author_id
+         AND PA1.publication_id=PA2.publication_id 
+      GROUP BY PA1.author_id
+      ORDER BY collaborators_count DESC 
+      LIMIT 10) as q2
+ON q1.author_id=q2.author_id
+ORDER BY collaborators_count DESC ;
+\echo
+\echo
 
 
 \echo Question 7:
-SELECT A.name, COUNT(*) AS publication_count 
-FROM author A, publication P, publicationauthor PA 
-WHERE P.publication_id=PA.publication_id 
-	AND A.author_id=PA.author_id 
-	AND (P.key LIKE 'journals/%' OR P.key LIKE 'conf/%') 
-	AND P.year BETWEEN 2012 AND 2016 
-	AND LOWER(P.title) LIKE '%data%' 
-GROUP BY A.author_id
-ORDER BY count(*) DESC 
-LIMIT 10;
+SELECT q1.name AS author, q2.publication_count 
+FROM author as q1, (
+	SELECT author_id, COUNT(PA.*) AS publication_count 
+	FROM publicationauthor PA, publication p
+	WHERE (P.key LIKE 'journals/%' OR P.key LIKE 'conf/%')
+		AND LOWER(P.title) LIKE '%data%' 
+		AND p.year BETWEEN 2012 AND 2016
+		AND p.publication_id = PA.publication_id
+	GROUP BY author_id
+	ORDER BY publication_count DESC 
+	LIMIT 10) as q2 
+WHERE q1.author_id=q2.author_id
+ORDER BY publication_count DESC;
+\echo
+\echo
 
 
 \echo Question 8:
@@ -156,6 +164,8 @@ FROM author as q1, (
 	LIMIT 10) as q2 
 WHERE q1.author_id=q2.author_id
 ORDER BY publication_count DESC;
+\echo
+\echo
 
 
 \echo Question 9:
