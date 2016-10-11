@@ -165,3 +165,19 @@ ON author_1.author_id = author_2.author_id
 WHERE author_2.author_id IS NULL
 GROUP BY author_1.name
 HAVING COUNT(*) >= 10;
+----------------------------------------------------------------------------
+
+-------------------------------------Q7-------------------------------------
+SELECT q1.name AS author, q2.publication_count 
+FROM author as q1, (
+	SELECT author_id, COUNT(PA.*) AS publication_count 
+	FROM publicationauthor PA, publication p
+	WHERE (P.key LIKE 'journals/%' OR P.key LIKE 'conf/%')
+		AND LOWER(P.title) LIKE '%data%' 
+		AND p.year BETWEEN 2012 AND 2016
+		AND p.publication_id = PA.publication_id
+	GROUP BY author_id
+	ORDER BY publication_count DESC 
+	LIMIT 10) as q2 
+WHERE q1.author_id=q2.author_id
+ORDER BY publication_count DESC;

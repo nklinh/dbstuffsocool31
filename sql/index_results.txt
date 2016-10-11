@@ -61,4 +61,11 @@ CREATE INDEX pub_title_data_index ON Publication((LOWER(title) LIKE '%data%')); 
 
 CREATE INDEX pub_jour_conf_data_index ON Publication((((key LIKE 'journals/%') OR (key LIKE 'conf/%')) AND (LOWER(title) LIKE '%data%')));
 
-Index: 
+CREATE INDEX pub_year_jour_conf_data_index ON Publication(year, (((key LIKE 'journals/%') OR (key LIKE 'conf/%')) AND (LOWER(title) LIKE '%data%')));
+
+Q7 optimized:
+No index: 69603.509ms
+
+CREATE INDEX pub_title_data_index ON Publication((LOWER(title) LIKE '%data%')); ----> 54321.343ms
+
+CREATE INDEX pub_year_index ON Publication (year); ----> 55094.102ms
