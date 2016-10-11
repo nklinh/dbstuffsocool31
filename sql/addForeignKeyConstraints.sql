@@ -1,4 +1,7 @@
 \timing on
+-- UNIQUE on Publication
+ALTER TABLE Publication ADD UNIQUE (key);
+
 -- Many-to-one
 ALTER TABLE publication ADD FOREIGN KEY (publisher_id) REFERENCES publisher(publisher_id);
 
