@@ -1,16 +1,9 @@
-Q5 not optimized:
-No index: 5s
-With index: 4s
-
-Q6:
-optimized: 2min
-original: 2min
-
-Q4:
-optimized: 5s
-original: 32s
-
 -----------------------------------------------
+
+Q1:
+No index: 1128.694ms
+
+CREATE INDEX pub_category_index ON Publication(category); ---> 1334.891ms
 
 Q3b:
 No index: 729.541ms
@@ -45,6 +38,48 @@ CREATE INDEX pub_year_index ON Publication (year);
 Index on year: 2344.984ms
 
 Q6:
+Query plan seems to be similar for both original and optimized.
+The optimized query seems to incur more cost due to the last index Scan on author_pkey
+
+Original:
+--------------------------------------------------------------------------------------------------------------------------------------------------
+ Nested Loop  (cost=20275799.24..20275883.49 rows=10 width=24)
+   ->  Limit  (cost=20275798.81..20275798.84 rows=10 width=12)
+         ->  Sort  (cost=20275798.81..20276311.08 rows=204905 width=12)
+               Sort Key: (count(DISTINCT pa2.author_id)) DESC
+               ->  GroupAggregate  (cost=19532415.09..20271370.89 rows=204905 width=12)
+                     Group Key: pa1.author_id
+                     ->  Sort  (cost=19532415.09..19778050.68 rows=98254233 width=8)
+                           Sort Key: pa1.author_id
+                           ->  Merge Join  (cost=0.87..2459194.69 rows=98254233 width=8)
+                                 Merge Cond: (pa1.publication_id = pa2.publication_id)
+                                 Join Filter: (pa1.author_id <> pa2.author_id)
+                                 ->  Index Only Scan using pub_author on publicationauthor pa1  (cost=0.44..357522.47 rows=9875894 width=8)
+                                 ->  Materialize  (cost=0.44..382212.21 rows=9875894 width=8)
+                                       ->  Index Only Scan using pub_author on publicationauthor pa2  (cost=0.44..357522.47 rows=9875894 width=8)
+   ->  Index Scan using author_pkey on author q1  (cost=0.43..8.45 rows=1 width=20)
+         Index Cond: (author_id = pa1.author_id)
+(16 rows)
+
+Optimized:
+--------------------------------------------------------------------------------------------------------------------------------------------------
+ Limit  (cost=20343509.51..20343509.54 rows=10 width=24)
+   ->  Sort  (cost=20343509.51..20344021.78 rows=204905 width=24)
+         Sort Key: (count(DISTINCT pa2.author_id)) DESC
+         ->  Merge Join  (cost=19532415.52..20339081.59 rows=204905 width=24)
+               Merge Cond: (pa1.author_id = author.author_id)
+               ->  GroupAggregate  (cost=19532415.09..20271370.89 rows=204905 width=12)
+                     Group Key: pa1.author_id
+                     ->  Sort  (cost=19532415.09..19778050.68 rows=98254233 width=8)
+                           Sort Key: pa1.author_id
+                           ->  Merge Join  (cost=0.87..2459194.69 rows=98254233 width=8)
+                                 Merge Cond: (pa1.publication_id = pa2.publication_id)
+                                 Join Filter: (pa1.author_id <> pa2.author_id)
+                                 ->  Index Only Scan using pub_author on publicationauthor pa1  (cost=0.44..357522.47 rows=9875894 width=8)
+                                 ->  Materialize  (cost=0.44..382212.21 rows=9875894 width=8)
+                                       ->  Index Only Scan using pub_author on publicationauthor pa2  (cost=0.44..357522.47 rows=9875894 width=8)
+               ->  Index Scan using author_pkey on author  (cost=0.43..58576.21 rows=1809652 width=20)
+(16 rows)
 
 Q7:
 No index: 103318.001ms
