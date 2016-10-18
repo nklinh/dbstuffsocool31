@@ -2,7 +2,7 @@
 \timing on
 -- path_to_csv is the psql environment variable.
 -- Change this   vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-\set path_to_csv /Users/youwei/Y4S1/CZ4031_Database/Project/Project_1/csv_half/
+\set path_to_csv /Users/youwei/Y4S1/CZ4031_Database/Project/Project_1/csv_whole/
 --               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 -- to the path where you place the csv files. Notice that there is no quotation mark.
 \echo Creating tables.

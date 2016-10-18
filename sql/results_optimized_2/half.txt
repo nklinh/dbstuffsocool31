@@ -1,0 +1,179 @@
+Timing is on.
+Questions 1:
+   category    | count  
+---------------+--------
+ incollection  |  19734
+ book          |   6409
+ article       | 756975
+ inproceedings | 933583
+(4 rows)
+
+Time: 673.481 ms
+
+
+Question 2:
+        author         | publication_count 
+-----------------------+-------------------
+  H. Vincent Poor      |               641
+  Wei Wang             |               532
+  Wei Zhang            |               520
+  Philip S. Yu         |               483
+  Wen Gao 0001         |               476
+  Tao Li               |               470
+  Lajos Hanzo          |               467
+  Yu Zhang             |               448
+  Mohamed-Slim Alouini |               448
+  Elisa Bertino        |               447
+(10 rows)
+
+Time: 7237.589 ms
+
+
+Question 3a:
+                             title                             |      author      | year 
+---------------------------------------------------------------+------------------+------
+ Innovating multiagent algorithms for smart city: An overview. |  Takanobu Otsuka | 2012
+ Teaching Method Based on Learning Networks.                   |  Takanobu Otsuka | 2012
+(2 rows)
+
+Time: 826.077 ms
+
+
+Question 3b:
+      name       | year |                                           title                                            
+-----------------+------+--------------------------------------------------------------------------------------------
+  Florian Skopik | 2015 | Establishing national cyber situational awareness through incident information clustering.
+  Florian Skopik | 2015 | On demand for situational awareness for preventing attacks on the smart grid.
+(2 rows)
+
+Time: 353.400 ms
+
+
+Question 3c:
+              name               
+---------------------------------
+  Dimitris Tsaptsinos
+  Aderonke Favour-Bethy Thompson
+  Eckhard Pfluegel
+  Florian Skopik
+  Boniface Kayode Alese
+(5 rows)
+
+Time: 378.800 ms
+
+
+Question 4a:
+          name          
+------------------------
+  Joseph M. Hellerstein
+  Samuel Madden
+  Dan Suciu
+  Divesh Srivastava
+  H. V. Jagadish
+  Christian S. Jensen
+  Magdalena Balazinska
+  Amol Deshpande
+(8 rows)
+
+Time: 1716.810 ms
+
+
+Question 4b:
+          name          
+------------------------
+  Anastasia Ailamaki
+  Joseph M. Hellerstein
+  Dan Suciu
+  Ihab F. Ilyas
+  Amol Deshpande
+  Samuel Madden
+  Ippokratis Pandis
+  Magdalena Balazinska
+(8 rows)
+
+Time: 977.394 ms
+
+
+Question 5:
+ year_range  | count  
+-------------+--------
+ 1970 - 1974 |   6756
+ 1975 - 1979 |  11169
+ 1980 - 1984 |  19361
+ 1985 - 1989 |  36407
+ 1990 - 1994 |  74710
+ 1995 - 1999 | 124800
+ 2000 - 2004 | 226378
+ 2005 - 2009 | 429819
+ 2010 - 2014 | 580509
+ 2015 - 2019 | 200736
+(10 rows)
+
+Time: 755.390 ms
+
+
+Question 6:
+   author   | collaborators_count 
+------------+---------------------
+  Wei Wang  |                1301
+  Wei Zhang |                1125
+  Yang Liu  |                 980
+  Yu Zhang  |                 934
+  Wei Li    |                 930
+  Li Zhang  |                 924
+  Lei Zhang |                 891
+  Jing Li   |                 884
+  Jun Wang  |                 881
+  Jing Wang |                 856
+(10 rows)
+
+Time: 37234.875 ms
+
+
+Question 7:
+         author         | publication_count 
+------------------------+-------------------
+  Alfredo Cuzzocrea     |                51
+  Sören Auer            |                39
+  Taghi M. Khoshgoftaar |                38
+  Wolfgang Lehner       |                34
+  Wei Zhang             |                31
+  Zhu Han               |                30
+  Xin Wang              |                28
+  Chao Li               |                28
+  Chang Liu             |                27
+  Tao Li                |                26
+(10 rows)
+
+Time: 1424.336 ms
+
+
+Question 8:
+Question: Find the top 10 authors with the largest
+number of publications in a selected period of years.
+         author         | publication_count 
+------------------------+-------------------
+  Henry C. Thacher Jr.  |                22
+  Boleslaw Sobocinski   |                18
+  Juris Hartmanis       |                17
+  Bernard A. Galler     |                15
+  Ivo Thomas            |                14
+  Harry D. Huskey       |                13
+  Peter Naur            |                13
+  Richard Edwin Stearns |                12
+  Jeffrey D. Ullman     |                12
+  Philip M. Lewis II    |                11
+(10 rows)
+
+Time: 404.673 ms
+
+
+Question 9:
+Question: Find the pair of authors who produced
+the most number of papers together.
+    author_1     |      author_2      | papers_count 
+-----------------+--------------------+--------------
+  Irith Pomeranz |  Sudhakar M. Reddy |          219
+(1 row)
+
+Time: 32442.261 ms
