@@ -5,6 +5,13 @@ No index: 1128.694ms
 
 CREATE INDEX pub_category_index ON Publication(category); ---> 1334.891ms
 
+Q3a:
+No index: 1416.854ms
+
+CREATE INDEX aut_name_index ON Author(name);
+CREATE INDEX pub_year_index ON Publication(year);
+1199.164ms
+
 Q3b:
 No index: 729.541ms
 
